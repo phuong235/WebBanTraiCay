@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebBanHang.Context.Order>
+
+<table class="table table-bordered" id="example">
+    <thead>
+        <tr style="font-weight: bold">
+            <td>#</td>
+            <td>Mã đơn hàng</td>
+            <td>Tên khách hàng</td>
+            <td>Số điện thoại</td>
+            <td>Tiền</td>
+            <td>Trạng thái</td>
+            <td>Ngày tạo</td>
+            <td class="no-sort">Thao tác</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            var i = 1;
+            foreach (var item in Model)
+            {
+
+<tr>
+    <td>@i</td>
+    <td>@item.Code</td>
+    <td>@item.CustomerName</td>
+    <td>@item.Phone</td>
+    <td>@WebBanHang.Common.Common.FormatNumber(item.TotalAmount, 0)</td>
+    @if (item.TypePayment == 1)
+    {
+<td>Chờ thanh toán</td>
+ }
+else if (item.TypePayment == 2)
+{
+<td>Đã thanh toán</td>
+ }
+else
+{
+<td>Hủy đơn hàng</td>
+}
+    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+    <td>
+        <a href="/order/view/@item.Id" class="btn btn-sm btn-success">Xem</a>
+       
+    </td>
+</tr>
+ i++;
+}
+}
+else
+{
+<tr>Bạn chưa có đơn hàng nào để hiển thị! Vui lòng <a href="/san-pham">mua hàng</a></tr>
+}
+    </tbody>
+</table>

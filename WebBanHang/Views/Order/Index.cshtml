@@ -1,0 +1,65 @@
+﻿
+@{ ViewBag.Title = "Danh sách đơn đặt hàng"; }
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+<div class="container" style="margin-top: 225px">
+    <div class="row">
+        <div class="col-md-12">
+            @if (Session["idUser"] != null)
+            {
+<section class="content">
+    <div class="card">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title của @Session["FullName"]</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Chờ thanh toán</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Đã thanh toán</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Đã hủy</a></li>
+
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="active tab-pane" id="activity">
+                                        @Html.Action("Partial_UnPaid", "Order")
+                                
+
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="timeline">
+                                        @Html.Action("Partial_Paid", "Order")
+                                    </div>
+
+                                    <div class="tab-pane" id="settings">
+                                        @Html.Action("Partial_Cancelled", "Order")
+                                    </div>
+                                </div>
+                                <!-- /.tab-content -->
+                            </div><!-- /.card-body -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section> }
+else
+{
+<h3>Vui lòng <a href="/users/login"> đăng nhập</a> để xem danh sách đơn hàng của bạn</h3>}
+        </div>
+    </div>
+</div>

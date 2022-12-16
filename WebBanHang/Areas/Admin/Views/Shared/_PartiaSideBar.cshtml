@@ -1,0 +1,133 @@
+﻿@if (Session["idUser"] != null)
+{
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                @if (@Session["Image"] != null)
+                {
+                    <img src="@Session["Image"]" class="img-circle elevation-2" alt="User Image">
+                }
+                else
+                {
+                    <img src="~/Content/assets/images/avar.png" alt="User Image">
+                }
+            </div>
+            <div class="info">
+                @if (Session["FullName"] != null)
+                {
+
+                    <a href="#" class="d-block">@Session["FullName"].ToString()</a>}
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                @if (Session["Role"].ToString() == "Admin")
+                {
+                    <li class="nav-item">
+                        <a href="/admin/menu" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Danh mục
+                            </p>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="/admin/news" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            Tin tức
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/order" class="nav-link">
+                        <i class="nav-icon fa fa-shopping-bag"></i>
+                        <p>
+                            Đơn hàng
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Quản lý sản phẩm
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/productcategory" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh mục sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/products" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sản phẩm</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @if (Session["Role"].ToString() == "Admin")
+                {
+                    <li class="nav-item">
+                        <a href="/admin/roles" class="nav-link">
+                            <i class="nav-icon fa fa-user-secret"></i>
+                            <p>
+                                Quyền
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/admin/users" class="nav-link">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Tài khoản
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/systemsetting" class="nav-link">
+                            <i class="nav-icon fab fa-joomla"></i>
+                            <p>
+                                Cấu hình hệ thống
+                            </p>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="/admin/statistical" class="nav-link">
+                        <i class="nav-icon fa fa-chart-pie"></i>
+                        <p>
+                            Thống kê
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/users/logout" class="nav-link">
+                        <i class="nav-icon fa fa-power-off"></i>
+                        <p>
+                            Đăng xuất
+                        </p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+}
+
+
+

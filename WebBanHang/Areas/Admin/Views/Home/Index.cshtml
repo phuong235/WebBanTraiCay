@@ -1,0 +1,98 @@
+﻿
+@{ ViewBag.Title = "Trang chủ admin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<div class="row">
+    <div class="col-md-12" style="margin-left: 30px; margin-top: 30px">
+        <div class="row">
+            <div class="col-md-4">
+
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            @if (@Session["Image"] != null)
+                            {
+                <img class="profile-user-img img-fluid img-circle"
+                     src="@Session["Image"]"
+                     alt="User profile picture"> }
+            else
+            {
+<img class="profile-user-img img-fluid img-circle" src="~/Content/assets/images/avar.png" alt="User Image">}
+
+                        </div>
+
+                        <h3 class="profile-username text-center"> Xin chào @Session["FullName"]</h3>
+
+                        <p class="text-muted text-center">@Session["Role"]</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>Email</b> <p class="float-right">@Session["Email"]</p>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Số điện thoại</b> <p class="float-right">@Session["Phone"]</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- About Me Box -->
+                <!-- /.card -->
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header p-2">
+                        Thống kê top sản phẩm bán chạy
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div>
+                            <canvas id="myPiechart"></canvas>
+                        </div>
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script>
+        var arrProducts = [];
+        var arrQuantity = [];
+
+        var ctx = document.getElementById("myPiechart").getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: arrProducts,
+                datasets: [{
+                    backgroundColor: ["#2ecc71", "#3498db", "95a5a6"],
+                    data: arrProducts
+                }]
+            }
+        })
+        console.log(arrProducts);
+        console.log(arrQuantity);
+         jQuery.ajax({
+                url: '@Url.Action("TopSelling", "Statistical")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        arrProducts.push(data[i].product);
+                        arrQuantity.push(data[i].quantity);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+
+            });
+    </script>
+}

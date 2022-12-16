@@ -1,0 +1,128 @@
+﻿@model WebBanHang.Context.User
+@{ ViewBag.Title = "Cập nhật tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+@section naviheader{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin" class="nav-link">Trang chủ</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="/admin/users" class="nav-link">Tài khoản</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Cập nhật</a>
+        </li>
+    </ul>
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhật tài khoản</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Tài khoản</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="card">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card-header">
+            <h3 class="card-title">Thông tin cập nhật tài khoản</h3>
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+<div class="bs-stepper-content">
+    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { }))
+    {
+@Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                                        @Html.HiddenFor(x => x.Id)
+                                                            @Html.HiddenFor(x => x.ResetPasswordCode)
+                                                                                @Html.HiddenFor(x => x.ConfirmPassword)
+                                                                                                    @Html.HiddenFor(x => x.Password)
+                                                                                                                        @Html.HiddenFor(x => x.Email)
+                                                                                                                                            @Html.HiddenFor(x => x.CreatedDate) <!-- your steps content here -->
+                                                                                                                                                                <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputEmail1">Họ</label>
+                                                                                                                                                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Họ" })
+                                                                                                                                                                        @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "text-danger" })
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputEmail1">Tên</label>
+                                                                                                                                                                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Tên" })
+                                                                                                                                                                        @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "text-danger" })
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputEmail1">Email</label>
+                                                                                                                                                                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email", @disabled = "disabled" })
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputFile">Ảnh đại diện</label>
+                                                                                                                                                                        <div class="input-group">
+                                                                                                                                                                            <div class="custom-file">
+                                                                                                                                                                                @Html.TextBoxFor(x => x.UserImage, new { @id = "txtImage", @class = "form-control" })
+                                                                                                                                                                            </div>
+                                                                                                                                                                            <div class="input-group-append">
+                                                                                                                                                                                <input type="button" value="Tải ảnh" onclick="BrowseServer('txtImage');" class="btn btn-primary" />
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputEmail1">Số điện thoại</label>
+                                                                                                                                                                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                                                                                                                                                                        @Html.ValidationMessageFor(x => x.Phone, null, new { @class = "text-danger" })
+                                                                                                                                                                    </div>
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <label for="exampleInputEmail1">Quyền</label>
+                                                                                                                                                                        @Html.DropDownListFor(x => x.RoleId, ViewBag.Role as SelectList, "-Chọn quyền", new { @class = "form-control" })
+                                                                                                                                                                        @Html.ValidationMessageFor(x => x.RoleId, null, new { @class = "text-danger" })
+                                                                                                                                                                    </div>
+
+
+                                                                                                                                                                    <div class="form-group">
+                                                                                                                                                                        <button type="submit" class="btn btn-success">Lưu</button>
+                                                                                                                                                                        <a class="btn btn-danger" href="/admin/users">Quay lại</a>
+                                                                                                                                                                    </div>
+                                                                                                                                                                </div>}
+
+</div>}
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('txtDetail', {
+                customConfig: '/content/ckeditor/config.js',
+                extraAllowedContent: 'span',
+            });
+        });
+
+        function BrowseServer(field) {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                document.getElementById(field).value = fileUrl;
+            };
+            finder.popup();
+        }</script>
+}

@@ -1,0 +1,229 @@
+﻿@model WebBanHang.Models.OrderViewModel
+
+@using(Html.BeginForm("CheckOut", "ShoppingCart", FormMethod.Post, new { id = "checkout" }))
+{
+if (Session["idUser"] != null)
+{
+
+<h3>Thông tin khách hàng</h3>
+<div class="form-group">
+    <label>Họ tên khách hàng</label>
+    @Html.TextBoxFor(x => x.CustomerName, new { @placeholder = "Họ và tên", @Value = Session["FullName"], @id = "CustomerName", @class="form-control"})
+    @Html.ValidationMessageFor(x => x.CustomerName, null, new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    <label>Số điện thoại</label>
+    @Html.TextBoxFor(x => x.Phone, new { @placeholder = "Số điện thoại", @Value = Session["Phone"], @id = "Phone", @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Phone, null, new { @class = "text-danger" })
+
+</div>
+<div class="form-group">
+
+    <label>Số nhà và tên đường</label>
+    @Html.TextBoxFor(x => x.Street, new {@id = "Street", @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Street, null, new { @class = "text-danger" })
+</div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <select class="form-select form-select-sm mb-3 form-control" id="city" aria-label=".form-select-sm">
+                                                                                <option value="" selected>Chọn tỉnh thành</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <select class="form-select form-select-sm mb-3 form-control" id="district" aria-label=".form-select-sm">
+                                                                                <option value="" selected>Chọn quận huyện</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <select class="form-select form-select-sm form-control" id="ward" aria-label=".form-select-sm">
+                                                                                <option value="" selected>Chọn phường xã</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+
+
+
+
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Email</label>
+                                                                    @Html.TextBoxFor(x => x.Email, new { @id = "Email", @class = "form-control", @Value = Session["Email"] })
+                                                                    @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                                                       @*             <input type="email" id="Email" class="form-control" autocomplete="off" value="@Session["Email"]" />
+                                                                    @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })*@
+                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label>Hình thức thanh toán</label>
+                                                                                                    <select class="form-control" name="TypePayment">
+                                                                                                        <option value="1">COD</option>
+                                                                                                        <optiion value="2">Chuyển khoản</optiion>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                                                <div class="form-group">
+                                                                                                                    <button type="submit" class="btn btn-block btn-success ">Đặt hàng</button>
+                                                                                                                </div>}
+
+                                                                                                            else
+                                                                                                            {
+                                                                                                <h3>Thông tin khách hàng</h3>
+                                                                                                                <div class="form-group">
+                                                                                                                    <label>Họ tên khách hàng</label>
+                                                                                                                    <input type="text" id="CustomerName" required class="form-control" autocomplete="off" autofocus />
+                                                                                                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <label>Số điện thoại</label>
+
+                                                                                                                                    <input type="text" id="Phone" min="10" class="form-control" autocomplete="off" onblur="telephoneCheck(this)" />
+
+                                                                                                                                </div>
+                                                                                                                                                <div class="form-group">
+                                                                                                                                                    <label>Tên đường và số nhà</label>
+                                                                                                                                                    <input type="text" id="Street" class="form-control" autocomplete="off" />
+                                                                                                                                                </div>
+                                                                                                                                                                <div class="form-group">
+                                                                                                                                                                    <div class="row">
+                                                                                                                                                                        <div class="col">
+                                                                                                                                                                            <select class="form-select form-select-sm mb-3 form-control" id="city" aria-label=".form-select-sm">
+                                                                                                                                                                                <option value="" selected>Chọn tỉnh thành</option>
+                                                                                                                                                                            </select>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="col">
+                                                                                                                                                                            <select class="form-select form-select-sm mb-3 form-control" id="district" aria-label=".form-select-sm">
+                                                                                                                                                                                <option value="" selected>Chọn quận huyện</option>
+                                                                                                                                                                            </select>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="col">
+                                                                                                                                                                            <select class="form-select form-select-sm form-control" id="ward" aria-label=".form-select-sm">
+                                                                                                                                                                                <option value="" selected>Chọn phường xã</option>
+                                                                                                                                                                            </select>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+
+
+
+
+
+                                                                                                                                                                </div>
+                                                                                                                                                                                <div class="form-group">
+                                                                                                                                                                                    <label>Email</label>
+                                                                                                                                                                                    <input type="email" id="Email" class="form-control" autocomplete="off" />
+                                                                                                                                                                                </div>
+                                                                                                                                                                                                <div class="form-group">
+                                                                                                                                                                                                    <label>Hình thức thanh toán</label>
+                                                                                                                                                                                                    <select class="form-control" name="TypePayment">
+                                                                                                                                                                                                        <option value="1">COD</option>
+                                                                                                                                                                                                        <optiion value="2">Chuyển khoản</optiion>
+                                                                                                                                                                                                    </select>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                <div class="form-group">
+                                                                                                                                                                                                                    <button type="submit" class="btn btn-block btn-success">Đặt hàng</button>
+                                                                                                                                                                                                                </div>}}
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+
+
+
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+
+    $(function () {
+        $('#checkout').submit(function (e) {
+
+            if ($(this).valid()) {
+                //the action is send with this ajax request and the send works
+                var param = {
+                    CustomerName: document.getElementById('CustomerName').value,
+                    Phone: document.getElementById('Phone').value,
+                    Street: document.getElementById('Street').value,
+                    Email: document.getElementById('Email').value,
+                    TypePayment: 1
+                }
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: {
+                        "data": JSON.stringify(param),
+                        ward: $("#ward option:selected").text(),
+                        district: $("#district option:selected").text(),
+                        city: $("#city option:selected").text()
+                    },
+                    success: function (rs) {
+                        window.location.href = 'https://localhost:44384/ShoppingCart/CheckOutSuccess';
+                    },
+                    error: function (rs) {
+                        alert("Đặt hàng thất bại")
+                    }
+                });
+            }
+            e.preventDefault();
+        });
+    });
+
+    // Bắt sự kiện ajax đặt hàng
+    $(".btnOrder").click(function () {
+     
+
+        $.ajax({
+            type: "POST",
+            url: "/ShoppingCart/CheckOut/",
+            data: {
+                // Bữa khúc này a sửa cho em nè
+                "data": JSON.stringify(param),
+                ward: $("#ward option:selected").text(),
+                district: $("#district option:selected").text(),
+                city: $("#city option:selected").text()
+            },
+            success: function (rs) {
+                window.location.href = 'https://localhost:44384/ShoppingCart/CheckOutSuccess';
+            },
+            error: function (rs) {
+                alert("Đặt hàng thất bại")
+            }
+        });
+    });
+
+
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Id);
+        }
+        citis.onchange = function () {
+            district.length = 1;
+            ward.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Id === this.value);
+
+                for (const k of result[0].Districts) {
+                    district.options[district.options.length] = new Option(k.Name, k.Id);
+                }
+            }
+        };
+        district.onchange = function () {
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Id === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                }
+            }
+        };
+    }
+</script>

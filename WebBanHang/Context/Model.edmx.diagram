@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51763416fb7747c4a0a4d5113c02cfcb" Name="Diagram1">
+        <EntityTypeShape EntityType="WebModel.Comment" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Contact" Width="1.5" PointX="5.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Menu" Width="1.5" PointX="7.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.News" Width="1.5" PointX="9.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.OrderDetail" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Order" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.ProductCategory" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.ProductImage" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Product" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Role" Width="1.5" PointX="0.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Statistic" Width="1.5" PointX="8.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.Subscribe" Width="1.5" PointX="10.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.sysdiagram" Width="1.5" PointX="10.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.SystemSetting" Width="1.5" PointX="11.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebModel.User" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <AssociationConnector Association="WebModel.FK__Comments__Produc__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__Comments__UserId__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__OrderDeta__Order__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__OrderDeta__Produ__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__Orders__UserId__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__Products__Produc__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__ProductIm__Produ__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="WebModel.FK__Users__RoleId__3E52440B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

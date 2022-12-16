@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebBanHang.Context.Menu>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="navbar_menu">
+        @foreach (var item in Model)
+        {
+            if (item.Alias.Equals("trang-chu"))
+            {
+                item.Alias = "";
+            }
+           @* if (item.Alias.Equals("san-pham"))
+            {
+                item.Alias = "danh-muc-san-pham/trai-cay-nhap-khau-1";
+            }*@
+            <li><a href="/@item.Alias">@item.Title</a></li>
+        }
+    </ul>
+}

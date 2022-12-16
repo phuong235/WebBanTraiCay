@@ -1,0 +1,135 @@
+﻿<div class="row">
+    <div class="col-md-6">
+        <h5>Pi chart example</h5>
+        <div>
+            <canvas id="myPiechart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <select onchange="updateChart(this)">
+                <option value="month">Theo Tháng</option>
+                <option value="arrYear">Theo năm</option>
+            </select>
+        </div>
+        <h5>Bar chart</h5>
+        <div><canvas id="myBarChart" width="400" height="200"></canvas></div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script>
+      
+
+            var ctx = document.getElementById("myPiechart").getContext('2d');
+
+            // Doanh thu theo tháng
+            var arrMonth = [];
+            var arrTotalMonthlyRevenue = [];
+
+            // Doanh thu theo năm
+            var arrYear = [];
+            var arrTotalYearByRevenue = [];
+
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: arrMonth,
+                    datasets: [{
+                        backgroundColor: ["#2ecc71", "#3498db", "95a5a6"],
+                        data: arrTotalMonthlyRevenue
+                    }]
+                }
+            })
+
+            var ctx_barChart = document.getElementById("myBarChart").getContext("2d");
+            var myBarChart = new Chart(ctx_barChart, {
+                type: 'bar',
+
+                data: {
+                    labels: arrMonth,
+                    datasets: [{
+                        label: 'Theo tháng',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        boderWidth: 2,
+                        data: arrTotalMonthlyRevenue
+                    }
+
+                    ]
+                },
+                options: option
+            });
+
+            var option = {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+
+
+
+            jQuery.ajax({
+                url: '@Url.Action("MonthlyRevenue", "ThongKe")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        arrMonth.push("Tháng " + data[i].Date);
+                        arrTotalMonthlyRevenue.push(data[i].Total);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+
+            });
+
+            jQuery.ajax({
+                url: '@Url.Action("RevenueByYear", "ThongKe")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        arrYear.push("Năm " + data[i].Date);
+                        arrTotalYearByRevenue.push(data[i].Total);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+
+            });
+
+        function updateChart(list) {
+            console.log(arrYear.value);
+    @*        myBarChart.data.label = arrYear;*@
+            myBarChart.data.datasets[0].data = option.value;
+            myBarChart.update();
+        }
+
+
+    </script>
+}
